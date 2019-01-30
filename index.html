@@ -61,7 +61,13 @@
             .content {
                 flex: 1;
                 padding: 20px 20px 20px 0px;
+                color: rgba(0, 0, 0, .7);
                 
+            }
+            
+            .content ul {
+                color: rgba(0, 0, 0, .6);
+                list-style: circle;
             }
             .interests header {
                 font-size: 1.25em;
@@ -70,6 +76,11 @@
             /*a little drop shadow */
             .sidebar img, main, nav {
                  box-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+            }
+            
+            #occupation-desc {
+                margin-top: 5px;
+                margin-bottom: 20px;
             }
         </style>
     </head>
@@ -91,7 +102,7 @@
     
                 <div class="content">
                     <header>Pickle Rick!</header>
-                    <p>Scientist at Jerry's Garage</p>
+                    <p id="occupation-desc">Scientist at Jerry's Garage</p>
                      <section class="interests">
                         <header>Interests</header>
                         <ul>
