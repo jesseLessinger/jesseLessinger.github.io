@@ -1,0 +1,104 @@
+            
+            
+            body {
+                background: linear-gradient(rgb(180, 183, 210),rgb(243, 245, 255));
+                color: rgb(45, 45, 45);
+                padding: 20px;
+                font-family: arial;
+                min-height: 100vh;
+            }
+            header {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+            #all-contents {
+                max-width: 800px;
+                margin: auto;
+               
+            }
+    
+            /* navigation menu */
+            nav {
+                background: rgb(191, 124, 124);
+                margin: 0 auto;
+                margin-bottom: 20px;
+                display: flex;
+                padding: 10px 10px 10px 50px;
+            }
+            nav header {
+                display: flex;
+                align-items: center;
+                color: rgb(255, 255, 255);
+                flex: 1;
+            }
+            nav ul {
+                list-style-image: none;
+            }
+            nav li {
+                display: inline-block;
+                padding: 0 10px;
+            }
+            nav a {
+                text-decoration: none;
+                color: #fff;
+            }
+    
+            /* main container area beneath menu */
+            main {
+                background: rgb(184, 190, 208);
+                display: flex;
+            }
+            .sidebar {
+                margin-right: 25px;
+                padding: 20px;
+            }
+            .sidebar img {
+                width: 200px;
+                border-radius: 5px 25px;
+            }
+            .content {
+                flex: 1;
+                padding: 20px;
+                color: rgba(0, 0, 0, .7);
+                
+            }
+            
+            .content ul {
+                color: rgba(0, 0, 0, .5);
+                list-style: circle;
+            }
+            .interests header {
+                font-size: 1.25em;
+            }
+            
+            /*a little drop shadow */
+            .sidebar img, main, nav {
+                 box-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+            }
+            
+            #occupation-desc {
+                margin-top: 5px;
+                margin-bottom: 20px;
+            }
+            
+               /* portfolio styles */
+            #portfolio {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            
+            #portfolio li {
+                background: #fff;
+                padding: 10px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+            
+            #portfolio li:hover {
+                background: #eee;
+            } 
+            
+            #portfolio a {
+                text-decoration: none;
+                color: #454545;
+            }
