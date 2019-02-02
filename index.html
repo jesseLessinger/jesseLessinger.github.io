@@ -6,21 +6,32 @@
              let toggle = "rick";
              function swapProfile() {
                  let pic = document.getElementById("profile-pic");
-                 let rickProfile = document.getElementById("rickProfile");
-                 let jesseProfile = document.getElementById("jesseProfile");
+                 let profile = document.getElementById("rickProfile");
+                 //let rickProfile = document.getElementById("rickProfile");
+                 //let jesseProfile = document.getElementById("jesseProfile");
+                 //These long html strings are not cute 
+                 //but my first way of having 2 divs that swapped between display none and block wouldn't pass your test, boo!
+                 let jesseHTMLprofile = "<header>Jesse Lessinger</header><p class=\"occupation-desc\">student at Operation Spark</p><section class=\"interests\"><header>Interests</header><ul><li>Dancing</li><li>Travel</li> <li>Cheese</li> </ul></section>";
+                 let rickHTMLprofile = "<header>Pickle Rick!</header><p class=\"occupation-desc\">scientist Jerry's garage</p><section class=\"interests\"><header>Interests</header><ul><li>Interdimensional travel</li><li>Adventures with Morty</li> <li>Beer</li> </ul></section>";
+                 
+                 
                  if (toggle === "rick") {
                      pic.src = "https://avatars0.githubusercontent.com/u/44981673?s=400&u=5bf0a8cea8547ddb9369cd058aa9194b39c195f9&v=4";
-                     rickProfile.style.display = "none";
-                     jesseProfile.style.display = "block";
+                     //rickProfile.style.display = "none";
+                     //jesseProfile.style.display = "block";
+                     profile.innerHTML = jesseHTMLprofile;
                      toggle = "jesse";
                  } else {
                      pic.src = "https://img.4plebs.org/boards/pol/image/1519/52/1519521709672.jpg";
-                     rickProfile.style.display = "block";
-                     jesseProfile.style.display = "none";
+                     //rickProfile.style.display = "block";
+                     //jesseProfile.style.display = "none";
+                     profile.innerHTML = rickHTMLprofile;
                      toggle = "jesse";
                      toggle = "rick";
                  }
              }
+             
+            
              
          </script>
         
@@ -44,34 +55,37 @@
                     <img id="profile-pic" src= "https://img.4plebs.org/boards/pol/image/1519/52/1519521709672.jpg" onclick="swapProfile()"/> <!-- src="https://avatars0.githubusercontent.com/u/44981673?s=400&u=5bf0a8cea8547ddb9369cd058aa9194b39c195f9&v=4" />   -->
                 </div>
     
-                <div class="content">
-                    <div id="rickProfile"> 
-                        <header>Pickle Rick!</header>
-                        <p id="occupation-desc">scientist at Jerry's garage</p>
-                         <section class="interests">
+                <div class="content" id="rickProfile">
+                   
+                    <header>Pickle Rick!</header>
+                    <p class="occupation-desc" id="desc">scientist at Jerry's garage</p>
+                        <section class="interests">
                             <header>Interests</header>
                             <ul>
                                 <li>Interdimensional travel</li> 
                                 <li>Adventures with Morty</li> 
-                                <li>Beer</li> <!--CHeese -->
+                                <li>Beer</li> 
                             </ul>
                         </section>
-                    </div>
-                     <div id="jesseProfile" style="display:none"> 
-                        <header>Jesse Lessinger</header>
-                        <p id="occupation-desc">Student at Operation Spark</p> 
-                         <section class="interests">
-                            <header>Interests</header>
-                            <ul>
-                                <li>Dancing</li>
-                                <li>Travel</li> 
-                                <li>Cheese</li> 
-                            </ul>
-                        </section>
-                    </div>
-                    
-                    
                 </div>
+                
+                   <!--
+                <div class="content" id="jesseProfile" style="display:none"> 
+                    <header>Jesse Lessinger</header>
+                    <p class="occupation-desc">Student at Operation Spark</p> 
+                    <section class="interests">
+                        <header>Interests</header>
+                        <ul>
+                            <li>Dancing</li>
+                            <li>Travel</li> 
+                            <li>Cheese</li> 
+                        </ul>
+                    </section>
+                </div>
+                -->
+                
+                    
+                
             </main>
         </div>
     </body>
