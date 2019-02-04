@@ -25,12 +25,12 @@ function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
     
     let arr = [];
-    let inc = end > start ? 1 : -1;
+    let inc = start < end ? 1 : -1;
     
     while (start !== end) {
         arr.push(start);
-        start -= inc; 
-    } ;
+        start += inc; 
+    } ; 
     arr.push(end);
     
 
