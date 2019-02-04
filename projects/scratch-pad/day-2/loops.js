@@ -130,7 +130,7 @@ if((typeof process !== 'undefined') &&
     // here, export any references you need for tests //
     module.exports.printArrayValues = printArrayValues;
     module.exports.printArrayValuesInReverse = printArrayValuesInReverse;
-    module.exports.getObjectValues = getObjectValues;
+    module.exports.getObjectValues = getObjectValues; //Jesse added this line, still doesn't work
     module.exports.printObjectValues = printObjectValues;
     module.exports.getObjectKeys = getObjectKeys;
     module.exports.printObjectKeys = printObjectKeys;
