@@ -16,7 +16,7 @@ function isArray(value) {
     // YOUR CODE BELOW HERE //
     
     
-    
+    return Array.isArray(value);
     
     // YOUR CODE ABOVE HERE //
 }
@@ -33,7 +33,7 @@ function isObject(value) {
     // YOUR CODE BELOW HERE //
     
     
-    
+    return value instanceof Object && !Array.isArray(value) && !(value instanceof Date);
     
     // YOUR CODE ABOVE HERE //
 }
@@ -48,7 +48,7 @@ function isCollection(value) {
     // YOUR CODE BELOW HERE //
     
     
-    
+    return !(value instanceof Date) && value instanceof Object || Array.isArray(value);
     
     // YOUR CODE ABOVE HERE //
 }
@@ -75,11 +75,26 @@ function isCollection(value) {
 function typeOf(value) {
     // YOUR CODE BELOW HERE //
     
+    if (typeof value === "object") {
+        if (value instanceof Date) {
+            return "date";
+        } else if (value === null) {
+            return "null";
+        } else if (Array.isArray(value)) {
+            return "array";
+        } else {
+            return "object"
+        }  
+    } else {
+        return typeof value;
+    } 
     
-    
+  
     
     // YOUR CODE ABOVE HERE //
 }
+
+console.log(typeOf([]));  
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&
