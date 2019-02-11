@@ -30,7 +30,7 @@ function range(start, end) {
     while (start !== end) {
         arr.push(start);
         start += inc; 
-    } ; 
+    }  
     arr.push(end);
     
 

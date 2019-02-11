@@ -71,7 +71,14 @@ function getObjectValues(object) {
   // YOUR CODE BELOW HERE //
   
   
-  return Object.values(object);
+ // return Object.values(object);
+ let arr = [];
+ 
+ for(let key in object) {
+   arr.push(object[key]);
+ }
+ 
+ return arr;
   
   // YOUR CODE ABOVE HERE //
 }

@@ -130,10 +130,12 @@ function join(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
     var args = Array.from(arguments);
 
-   return args.reduce(function(acc, curr) {
+    return args.join("");
+    
+   /*return args.reduce(function(acc, curr) {
         acc += curr;
         return acc;
-    });
+    }); */
     // YOUR CODE ABOVE HERE //
 }
 

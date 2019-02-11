@@ -33,3 +33,54 @@ console.log(myName); // prints => bob
 var myVariable = 1;
 var myVariable = true;
 myVariable = "someString";
+
+
+/*      var, let, const
+
+* SCOPE
+* var has function scoping while let and const are scoped to any code block its declared inside of
+*/
+function rando() {
+    var myVar = "hello";
+    if (myVar === "hello"){
+        var newVar = 5;
+        let boolVar = true;
+    }
+    
+    // console.log(boolVar); this wouldn't work here cuz boolVar not defined 
+    console.log(newVar); //should print 5 since var isn't scope to an if block.
+    
+}
+
+//console.log(myVar); oh no, reference erorr, myVar is not defined cuz var is scoped to functions! 
+
+/* 
+*/
+// CONST can't be reassinged
+const meNoChange = "hello";
+//meNoChange = 5; error! can't re-assigm no constant brah.
+
+let iChange = "yo";
+var iChangeToo = "yo yo";
+
+iChange = "i'm different!";
+iChangeToo = "change is good";
+
+/* HOISTING 
+*
+* var (and functions) are "hoisted" to the top of their scope meaning the declaration
+* is brought to the top of the scope it's declared in, but the initialization is not 
+
+*/
+console.log(hoisted); //undefined, not 5 or 10
+
+hoisted = 5;
+
+console.log(hoisted); //5
+
+var hoisted = 10;
+
+console.log(hoisted); //10 
+
+
+

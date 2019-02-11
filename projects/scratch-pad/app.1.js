@@ -2,18 +2,17 @@
 
 'use strict';
 
-
-function reverseString(input) {
-    // YOUR CODE GOES BELOW HERE //
-    
-    let rev = "";
-    for (let i = input.length-1; i > -1; i--) {
-      rev += input[i];
-    }
-    return rev;
-    
-    // YOUR CODE GOES ABOVE HERE //
+function toDashCase(string) {
+  
+  return string.split(" ").join("-").toLowerCase();
+  
+  
 }
 
+function fun(str) {
+  
+  return toDashCase(str) + "everybody?".toUpperCase();
+}
 
-console.log(reverseString("hello"));
+console.log(fun("hello world what's up"));
+//toDashCase("Hello World");
