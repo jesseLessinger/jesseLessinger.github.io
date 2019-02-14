@@ -136,14 +136,23 @@ function isFriend(name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-    let results = [];
+    /*let results = [];
     console.log(name, array);
     for (let i = 0; i < array.length; i++) {
         if (!isFriend(name, array[i]) && array[i].name !== name) {
             results.push(array[i].name);
         }
     }
-    return results;
+    return results;*/
+    
+    return array
+        .filter((person)=>{
+            return !isFriend(name, person) && person.name !== name;
+        })
+        .map((person)=>{
+        return person.name;
+        });
+    
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -174,14 +183,21 @@ function removeProperties(object, array) {
 
 function dedup(array) {
     
-   return array.filter(function(elem,index,arr){
+   /*return array.filter(function(elem,index,arr){
         for (let i = 0; i < index; i++) {
             if (elem === arr[i]) {
                 return false;
             }
         }
         return true;
-    });
+    });*/
+    
+    return array.filter((elem, index, arr)=>{
+        //console.log(arr.slice(0, index));
+        return !arr.slice(0, index).some((dupe)=>{
+            return elem == dupe;
+        })
+    })
 
 }
 
