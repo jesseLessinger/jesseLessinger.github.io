@@ -3,7 +3,8 @@
 'use strict';
 
 var customers = require('./data/customers.json');
-var _ = require(/* Replace this with the name of your lodown! */);
+var _ = require('lodown-jesselessinger');
+
 
 /**
  * 1. Import your lodown module using the require() method,
@@ -21,25 +22,121 @@ var _ = require(/* Replace this with the name of your lodown! */);
 
 var maleCount = function(array) {
 
+    return _.filter(array, (person)=>{
+        return person.gender === "male";
+    }).length;
+   
+ 
+
 };
 
-var femaleCount;
+var femaleCount = function(array) {
+    
+    return _.reduce(array,(count, person)=>{
+        return count + (person.gender === "female" ? 1 : 0);
+    },0);
+}
 
-var oldestCustomer;
+var oldestCustomer = (array) => {
+    
+    return _.reduce(array,(oldest, person)=>{
+        return person.age > oldest.age ? person : oldest; 
+    }).name
+};
 
-var youngestCustomer;
+var youngestCustomer = (array) => {
+    
+    return _.reduce(array,(youngest, person)=>{
+        return person.age < youngest.age ? person : youngest; 
+    }).name
+};
 
-var averageBalance;
+var averageBalance = (array) => {
+  return _.reduce(array,(total, person)=>{
+      return total + parseFloat(person.balance.replace(/\$|\,?/g,"")); 
+  }, 0) / array.length; 
+}
 
-var firstLetterCount;
+var firstLetterCount = (arr, letter) => {
+    return _.reduce(arr, (count, person)=>{
+        return count + 
+            (person.name[0].toLowerCase() === letter.toLowerCase() ? 1 :0)
+    }, 0);
+};
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = (arr, name, letter) => {
+    
+   for (let person of arr) {
+       if (person.name === name) {
+           return _.reduce(person.friends,(count, friend)=>{
+               return count + 
+                (friend.name[0].toLowerCase() === letter.toLowerCase() ? 1 :0)
+           },0)
+       }
+   }
+};
 
-var friendsCount;
 
-var topThreeTags;
+var friendsCount = (arr, name) =>{
+    
+    //filter out friends
+    let friendsList = _.filter(arr, (person)=>{
+        let friends = _.pluck(person.friends, "name"); 
+        return _.contains(friends, name);
+    }); 
+    
+    return _.pluck(friendsList, "name")
+    
+};
 
-var genderCount;
+var topThreeTags = (arr)=>{
+    
+   let tags = _.pluck(arr, "tags");
+   let allTags = _.reduce(tags,(accum,tagArr)=>{
+        return accum.concat(tagArr);
+    })
+    
+    let count = {};
+    _.each(allTags, (tag)=>{
+        if (count[tag]) count[tag] += 1;
+        else count[tag] = 1;
+    })
+    
+    let tag1 = 0, tag2 = 0, tag3 = 0;
+    let topThree = [];
+
+    _.each(count, (tagCount,tag)=>{
+        if (tagCount > tag1) {
+            topThree[0] = tag;
+            tag1 = tagCount;
+        } else if (tagCount > tag2) {
+            topThree[1] = tag;
+            tag2 = tagCount;
+        } else if (tagCount > tag3) {
+            topThree[2] = tag;
+            tag3 = tagCount;
+        }
+    })    
+    
+    
+    //console.log(topThree);
+    return topThree;
+    
+};
+
+
+
+
+var genderCount = (array) => {
+    let count = {};
+    
+    _.each(array, (person) => {
+        if (count[person.gender]) count[person.gender] += 1;
+        else count[person.gender] = 1;
+    })
+    
+    return count;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

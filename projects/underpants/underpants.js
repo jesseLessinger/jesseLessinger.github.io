@@ -121,8 +121,8 @@ _.last = function(arr, n) {
     if (n === undefined || typeof n !== 'number') {
         return arr[arr.length-1];
     }
-    if (n > arr.length) {
-        n = arr.length;
+    if (n >= arr.length) {
+       return arr;
     }
     
     let results = [];
@@ -202,15 +202,16 @@ _.contains = function(arr, value) {
 
 _.each = function(collection, callback) {
     
-    if (Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++) {
-            callback(collection[i], i, collection);
+        if (Array.isArray(collection)) {
+            for (let i = 0; i < collection.length; i++) {
+                callback(collection[i], i, collection);
+            }
+        } else {
+            console.log(collection);
+            for (let key in collection) {
+                callback(collection[key], key, collection);
+            }
         }
-    } else {
-        for (let key in collection) {
-            callback(collection[key], key, collection);
-        }
-    }
     
     
 };
@@ -227,13 +228,8 @@ _.each = function(collection, callback) {
 
 _.unique = function(arr) {
     
-    return arr.filter((elem, index, array) => {
-        for(let i = index-1; i > -1; i-- ){
-            if (elem === array[i]) {
-                return false;
-            }
-        }
-        return true; 
+    return _.filter(arr, (elem, index, array) => {
+        return _.indexOf(array, elem) == index;
     })
     
     
@@ -283,15 +279,12 @@ _.filter = function(arr, callback) {
 */
 
 _.reject = function(arr, callback) {
-    let results = [];
-    
-    for (let i = 0; i < arr.length; i++) {
-        if (!callback(arr[i], i, arr)) {
-            results.push(arr[i]);
-        }
-    }
-    
-    return results;
+  
+  return _.filter(arr, (e,i,arr)=>{
+      return !callback(e,i,arr);
+  })
+   
+   
     
 };
 
@@ -338,7 +331,7 @@ _.partition = function(arr, callback) {
 
 _.map = function(collection, callback) {
     let results = []; 
-      
+  /*    
     if (Array.isArray(collection)) {
         for (let i = 0; i < collection.length; i++) {
             results.push(callback(collection[i], i, collection));
@@ -347,7 +340,11 @@ _.map = function(collection, callback) {
         for (let key in collection) {
             results.push(callback(collection[key], key, collection));
         }
-    }
+    }*/
+    
+    _.each(collection, (e,i,c) =>{
+        results.push(callback(e,i,c));
+    })
     
     return results;
 }
@@ -390,9 +387,18 @@ _.pluck = function(arr, key) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
-_.every = function(collection, callback) {
-    
-      
+_.every = function(collection, test) {
+   
+   if (test === undefined) test = _.identity;
+   
+   let success = true; 
+   _.each(collection, (elem, indx, col)=>{
+       if (!test(elem,indx, col)) success = false;
+   })
+   
+   return success;
+   
+    /*
     if (Array.isArray(collection)) {
         for (let i = 0; i < collection.length; i++) {
             if (callback === undefined) {
@@ -417,7 +423,7 @@ _.every = function(collection, callback) {
         }
     }
     
-    return true;
+    return true;*/
 };
 
 /** _.some
@@ -441,9 +447,18 @@ _.every = function(collection, callback) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
-_.some = function(collection, callback) {
+_.some = function(collection, test) {
     
-    if (Array.isArray(collection)) {
+    if (test === undefined) test = _.identity;
+   
+   let success = false; 
+   _.each(collection, (elem, indx, col)=>{
+       if (test(elem,indx, col)) success = true;
+   })
+   
+   return success;
+    
+  /*  if (Array.isArray(collection)) {
         for (let i = 0; i < collection.length; i++) {
             if (callback === undefined) {
                 if (collection[i]) {
@@ -467,7 +482,7 @@ _.some = function(collection, callback) {
         }
     }
     
-    return false;
+    return false;*/
 };
 
 /** _.reduce
@@ -530,6 +545,28 @@ _.extend = function(targetObj, ...objs) {
     return targetObj;
 }
 
+
+/* 
+### Extra Credit:
+See Instructor for instructions.
+- defaults
+- *once*
+- memoize
+- delay
+- shuffle
+
+### Double Extra Credit:
+See Instructor for instructions.
+- once
+- invoke
+- sortBy
+- zip
+- flatten
+- intersection
+- difference
+- throttle
+
+*/
 
 
 //////////////////////////////////////////////////////////////////////
