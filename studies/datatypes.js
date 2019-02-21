@@ -81,7 +81,7 @@ console.log(b) //2 still equals 2
 var x = {name: "Jesse"}
 var y = x;
 x.name = "new name";
-console.log(y.name) //new name cuz y and z point to the same obj.
+console.log(y.name) //new name cuz x and y point to the same obj.
 
 
 

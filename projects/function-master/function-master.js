@@ -191,12 +191,16 @@ function dedup(array) {
         }
         return true;
     });*/
-    
+    /*
     return array.filter((elem, index, arr)=>{
         //console.log(arr.slice(0, index));
         return !arr.slice(0, index).some((dupe)=>{
             return elem == dupe;
         })
+    })
+    */
+     return array.filter((elem, index, arr)=>{
+        return (arr.indexOf(elem) === index);
     })
 
 }

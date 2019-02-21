@@ -1,17 +1,23 @@
 /*
-The two phases to using functions: First we must ___? Next we can execute (or two other words for executing a function?) a function by?
-first define, next we run, or call the function
+* FUNCTIONS
+*
+* functions are reusable blocks of code
+* first the must be defined, then they are used (called, executed, invoked, etc)
 */
-//declaration:
+
+//Declaration:
+//[keyword function] [function name] ([parameters]) { function body }
 function myFunc(myParam) {
     //do some stuff
+    return myParam + 3;
+    
 }
 //call
-myFunc(5);
+myFunc(5); //return 8
 
 
 //What’s the difference between a function’s parameters and arguments PASSED to a function?
-//parameters is how input is gathered for a function and used inside the function 
+//parameters is how input is gathered for a function and used inside the function definition
 //arguments are the specific data passed to a function when it's called
 function myFunc(myParam) {
     console.log(myParam) //myParam is the parameter
@@ -27,9 +33,12 @@ function functionName(parameters) {
 //How do we assign a function to a variable?
 const doSomething = function() {};
 
-//Functions can OPTIONALLY take inputs, and OPTIONALLY return a single value. 
-//How do we specify inputs, and how do we specify outputs?
-//inputs are specified with parameters, outputs with return statements
+//when designing a function we have the option to include inputs, we do this by putting
+//placeholders in parenthesis, but they are not required we can just use ()
+//we also have the option of returning a value, meaning when the function is called it will resolve
+//to one value,the one we return in the function definition, or undefinted the function doesn't return
+//anything.  we use the keyword return followed by a value (or statement that resolves to a value)
+
 const add = (x, y) => {return x + y};
 console.log(add(2,3)); //5!
 

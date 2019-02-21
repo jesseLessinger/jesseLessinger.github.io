@@ -89,6 +89,8 @@ var friendsCount = (arr, name) =>{
     
 };
 
+
+
 var topThreeTags = (arr)=>{
     
    let tags = _.pluck(arr, "tags");
@@ -96,16 +98,19 @@ var topThreeTags = (arr)=>{
         return accum.concat(tagArr);
     })
     
-    let count = {};
-    _.each(allTags, (tag)=>{
+    //tally them all up
+    let counter = 
+    _.reduce(allTags, (count,tag)=>{
         if (count[tag]) count[tag] += 1;
         else count[tag] = 1;
-    })
+        return count;
+    },{})
     
+    //find the top three
     let tag1 = 0, tag2 = 0, tag3 = 0;
     let topThree = [];
 
-    _.each(count, (tagCount,tag)=>{
+    _.each(counter, (tagCount,tag)=>{
         if (tagCount > tag1) {
             topThree[0] = tag;
             tag1 = tagCount;
@@ -118,10 +123,8 @@ var topThreeTags = (arr)=>{
         }
     })    
     
-    
-    //console.log(topThree);
     return topThree;
-    
+      
 };
 
 

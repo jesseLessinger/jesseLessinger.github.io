@@ -513,7 +513,7 @@ _.reduce = function(arr, callback, seed) {
     }
     
     for(let i = index; i < arr.length; i++) {
-        seed = callback(seed, arr[i], i);
+        seed = callback(seed, arr[i], i, arr);
     }
     
     return seed;

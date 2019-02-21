@@ -129,8 +129,8 @@ var exponent = function(base, exp) {
   if (exp > 0) {
     return base * exponent(base, exp-1);
   }
-  exp -= exp+exp; //when you can't use the math object
-  return 1 / exponent(base, exp);
+  //when exponent is negative
+  return 1 / exponent(base, -exp);
   
 };
 
@@ -153,10 +153,26 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string) {
+    if (string.length === 1) {
+      return string[0];
+    }
+    
+    return string[string.length-1] + reverse(string.substring(0,string.length-1)); 
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  string = string.replace(/\s/g,"");
+  if (string.length === 0 || string.length === 1) {
+    return true;
+  }
+  if (string[0].toLowerCase() !== string[string.length-1].toLowerCase()) {
+    return false;
+  }
+  
+  return palindrome(string.substring(1,string.length-1));
+  
+  
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -165,16 +181,32 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (x === 0 ) {
+    return 0;
+  }
+  if (x < 0) {
+    return 0-x;
+  }
+  return modulo(x-y, y);
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 var multiply = function(x, y) {
+  if (y === 0) {
+    return 0;
+  }
+  if (y < 0) {
+    y = -y;
+    x = -x;
+  }
+  return x + multiply(x, y-1);
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
 var divide = function(x, y) {
+  
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers.  The GCD of two
@@ -191,32 +223,85 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  
+  //different lengths, nope
+  //if (str1.length !== str2.length) return false;
+  
+  //empty strings or strings are the same
+  if (str1.length === 0 && str2.length === 0) return true;
+  
+  //char mismatch it's a no go
+  if (str1[0] !== str2[0]) return false;
+  
+  //still good, time to recurse
+  return compareStr(str1.substring(1), str2.substring(1));
+  
+  
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str){
+  
+  if (str.length === 0) return [];
+  
+  if (str.length === 1) return [str[0]];
+  
+  return [str[0]].concat(createArray(str.substring(1)));
+  
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+  
+  if (array.length === 0) return [];
+  
+  if (array.length === 1) return array;
+  
+  return [array[array.length-1]].concat(reverseArr(array.slice(0,array.length-1)));
+  
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+  
+  if (length === 0) return [];
+  
+  if (length === 1) return [value];
+  
+  return [value].concat(buildList(value, length-1));
+  
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
+  
+  if (array.length === 0) return 0;
+  
+  if (array.length === 1) return array[0] === value ? 1 : 0;
+  
+  return (array[0] === value? 1 : 0) + countOccurrence(array.slice(1), value);
+  
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
-var rMap = function(array, callback) {
+var rMap = (array, callback)=>{
+  
+  console.log(callback);
+  
+  if (array.length === 0) return [];
+  
+  if (array.length === 1) return callback(array[0],0,array);
+  
+  return [callback(array[0],0,array)].concat(rMap(array.slice(1), callback));
+  
+  
+  
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -244,6 +329,14 @@ var replaceKeysInObj = function(obj, key, newKey) {
 // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
 // Note:  The 0 is not counted.
 var fibonacci = function(n) {
+  
+ if (n < 1) return null;  
+  
+ if (n === 1)
+    return [0, 1];
+    
+  return fibonacci(n-1).push(nthFibo(n-1)+nthFibo(n-2))    
+  
 };
 
 // 25. Return the Fibonacci number located at index n of the Fibonacci sequence.
@@ -252,17 +345,40 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  
+  if (n < 0 ) return null;  
+  
+ if (n === 0 || n === 1) return n;
+  
+ return nthFibo(n-1) + nthFibo(n-2);
+
+ 
+  
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
-var capitalizeWords = function(input) {
+var capitalizeWords = function(words) {
+  
+ 
+ if (words.length === 1) return words[0].toUpperCase();
+ 
+ return [words[0].toUpperCase()].concat(capitalizeWords(words.slice(1))); 
+ 
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
-var capitalizeFirst = function(array) {
+var capitalizeFirst = function(words) {
+  
+  let capWord = words[0][0].toUpperCase()+words[0].slice(1);
+  
+  if (words.length === 1) 
+    return capWord;
+ 
+  return [capWord].concat(capitalizeFirst(words.slice(1))); 
+  
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.

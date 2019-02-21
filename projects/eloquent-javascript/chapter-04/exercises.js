@@ -172,3 +172,4 @@ if ((typeof process !== 'undefined') &&
     deepEqual,
   };
 };
+
