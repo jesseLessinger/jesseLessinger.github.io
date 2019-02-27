@@ -391,6 +391,7 @@ var capitalizeFirst = function(words) {
 // };
 // nestedEvenSum(obj1); // 10
 var nestedEvenSum = function(obj) {
+  
 };
 
 // 29. Flatten an array containing nested arrays.
@@ -400,7 +401,15 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj = {}) {
+  if (obj[str[0]]) obj[str[0]]++
+  else obj[str[0]] = 1;
+  
+  if (str.length === 1) {
+    return obj;  
+  }
+  
+  return letterTally(str.slice(1), obj)
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -409,6 +418,12 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function(list) {
+  if (list.length < 2 ) return list;
+  while (list[0] === list[1]) list.splice(1,1);
+  //if (list.length === 1) return list;
+  
+  return [list[0]].concat(compress(list.slice(1)))
+  
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -421,13 +436,23 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  if (array.length === 1) return array;
+  while ((array[0]) === 0 && array[1] === 0) array.splice(1,1)
+  return [array[0]].concat(minimizeZeroes(array.slice(1)));
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
-var alternateSign = function(array) {
+var alternateSign = function(array, sign = 1) {
+  let n = array[0];
+  if (sign > 0 && n < 0) array[0] = -n; //make positive
+  else if (sign < 0 && n > 0) array[0] = -n; //make negative
+  if (array.length === 1) return array;
+  
+  return [array[0]].concat(alternateSign(array.slice(1), -sign))
+  
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
